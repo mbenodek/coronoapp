@@ -5,242 +5,284 @@
 {% block content %}
 
 <div class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/buggsy2.jpg' %}">
-          <section class="container tm-page-1-content">
-            <div class="row">
-              <div class="col-md-6 ml-auto tm-text-white">
+    <section class="container tm-page-1-content">
+        <div class="row">
+            <div class="col-md-6 ml-auto tm-text-white">
                 <header><h1>Covid-19 Tracker</h1></header>
                 <p>Check the stats for Corona by clicking below</p>
-                  <a href="#tm-section-2" class="btn btn-danger">STATS...</a>
+                <a href="#tm-section-2" class="btn btn-danger">STATS...</a>
 
-              </div>
             </div>
-
-          </section>
         </div>
 
-        <!-- Below code is for India Cases -->
+    </section>
+</div>
 
-    <!-- Adding the Country  Modal -->
+<!-- Below code is for India Cases -->
 
-<div class="modal" tabindex="-1" id="myModal" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content" style="background-color:black;">
-      <div class="modal-header " style="background-color:grey;">
-        <h5 class="modal-title">Covid 19 World</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-                    <!--Table-->
-                    <table class="table table-hover table-dark table-bordered"  style="border:1px solid black;margin-left:auto;margin-right:auto;">
-                        <thead>
-                        <tr >
-                            <th >Country</th>
-                            <th >Confirmed</th>
-                            <th >Active</th>
-                            <th>Recovered</th>
-                            <th >Deaths</th>
+<!-- Adding the Country  Modal -->
 
+<div class="modal" tabindex="-1" class="parallax-window" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="background-color:black;">
+            <div class="modal-header " style="background-color:grey;">
+                <h5 class="modal-title">Covid 19 World</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--Table-->
+                <table class="table table-hover table-dark table-bordered"
+                       style="border:1px solid black;margin-left:auto;margin-right:auto;">
+                    <thead>
+                    <tr>
+                        <th>Country</th>
+                        <th>Confirmed</th>
+                        <th>Active</th>
+                        <th>Recovered</th>
+                        <th>Deaths</th>
+
+                    </tr>
+                    </thead>
+                    <div>
+                        {% for data in countrywise_count|slice:":10" %}
+                        <tbody>
+                        <tr>
+                            <td>{{ data.attributes.Country_Region }}</td>
+                            <td>{{ data.attributes.Confirmed }}</td>
+                            <td>{{ data.attributes.Active }}</td>
+                            <td>{{ data.attributes.Recovered }}</td>
+                            <td>{{ data.attributes.Deaths }}</td>
                         </tr>
-                        </thead>
-                        <div >
-                        {% for data in countrywise_count|slice:":10"  %}
-                           <tbody>
-                            <tr >
-                                <td>{{ data.attributes.Country_Region }}</td>
-                                <td>{{ data.attributes.Confirmed }}</td>
-                                <td>{{ data.attributes.Active }}</td>
-                                <td>{{ data.attributes.Recovered }}</td>
-                                <td>{{ data.attributes.Deaths }}</td>
-                            </tr>
                         </tbody>
                         {% endfor %}
-                        </div>
-                    </table>
+                    </div>
+                </table>
             </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-      </div>
-    </div>
-  </div>
-</div>
-    <!-- End of World Model Code -->
-
-    <!-- Start of India Model Code -->
-
-<div class="modal fade bs-example-modal-lg" tabindex="-1" id="myModalIndia" role="dialog">
-  <div class="modal-dialog " >
-    <div class="modal-content" style="background-color:black;">
-      <div class="modal-header " style="background-color:grey;">
-        <h5 class="modal-title">Covid 19 India</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-                    <!--Table-->
-                    <table class="table table-hover table-dark table-bordered" id="indiatable">
-                        <thead>
-                        <tr >
-                            <th scope="col">State/UT</th>
-                            <th scope="col">Active Cases</th>
-                            <th scope="col">Confirmed</th>
-                            <th scope="col">Recovered</th>
-                            <th scope="col">Deaths</th>
-                            <th scope="col">Active Rate</th>
-                            <th scope="col">Death Rate</th>
-                            <th scope="col">Recovered Rate</th>
-                        </tr>
-                        </thead>
-
-                        {% for info in india_count %}
-                         {% for test in info.state_data  %}
-                        <div >
-                            <tbody>
-
-                                <td >{{ test.state }}</td>
-                                <td>{{ test.active }}</td>
-                                <td>{{ test.confirmed }}</td>
-                                <td>{{ test.recovered }}</td>
-                                <td>{{ test.deaths }}</td>
-                                <td>{{ test.active_rate }}</td>
-                                <td>{{ test.death_rate }}</td>
-                                <td>{{ test.recovered_rate }}</td>
-
-                        </div>
-                        </tbody>
-                        {% endfor %}
-                        {% endfor %}
-                    </table>
             </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-      </div>
+        </div>
     </div>
-  </div>
 </div>
-    <!-- End of India Model Code -->
+<!-- End of World Model Code -->
+
+<!-- Start of India Model Code -->
+
+<div class="modal fade bs-example-modal-lg" class="parallax-window" tabindex="-1" id="myModalIndia" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content" id="myModalIndiacontent" style="background-color:black;">
+            <div class="modal-header " id="myModalIndiaheader" style="background-color:grey;">
+                <h5 class="modal-title">Covid 19 India</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--Table-->
+                <table class="table table-hover table-dark table-bordered" id="indiatable">
+                    <thead>
+                    <tr>
+                        <th scope="col">State/UT</th>
+                        <th scope="col">Confirmed</th>
+                        <th scope="col">Active Cases</th>
+                        <th scope="col">Recovered</th>
+                        <th scope="col">Deaths</th>
+                        <th scope="col">Active Rate</th>
+                        <th scope="col">Death Rate</th>
+                        <th scope="col">Recovered Rate</th>
+                    </tr>
+                    </thead>
+
+                    {% for info in india_count %}
+                    {% for test in info.state_data %}
+                    <div>
+                        <tbody>
+
+                        <td>{{ test.state }}</td>
+                        <td>{{ test.confirmed }}</td>
+                        <td>{{ test.active }}</td>
+                        <td>{{ test.recovered }}</td>
+                        <td>{{ test.deaths }}</td>
+                        <td>{{ test.active_rate }}</td>
+                        <td>{{ test.death_rate }}</td>
+                        <td>{{ test.recovered_rate }}</td>
+
+                    </div>
+                    </tbody>
+                    {% endfor %}
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of India Model Code -->
 
 
-        <div id="tm-section-2" class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/church_blue.JPG' %}">
-          <section class="container tm-page-1-content tm-page-2">
-            <div class="row">
-              <article class="col-md-6 tm-article tm-bg-white-transparent">
-                <header><h2 >Covid 19 Stats - Country Wise</h2></header>
+<div id="tm-section-2" class="parallax-window" data-parallax="scroll"
+     data-image-src="{% static 'img/church_blue.JPG' %}">
+    <section class="container tm-page-1-content tm-page-2">
+        <div class="row">
+            <article class="col-md-6 tm-article tm-bg-white-transparent">
+                <header><h2>Covid 19 Stats - Country Wise</h2></header>
                 <b></b>
-              <a href="#myModal" data-toggle="modal" href="#myModal"data-target="#myModal" class="btn btn-danger ml-auto mr-0 tm-btn-block">Details...</a>
-              </article>
+                <a href="#myModal" data-toggle="modal" href="#myModal" data-target="#myModal"
+                   class="btn btn-danger ml-auto mr-0 tm-btn-block">Details...</a>
+            </article>
 
-              <article class="col-md-6 tm-article tm-bg-white-transparent">
+            <article class="col-md-6 tm-article tm-bg-white-transparent">
                 <header><h2>Covid 19 Stats - India</h2></header>
                 <b></b>
-                  <a href="#myModalIndia" data-toggle="modal" href="#myModal"data-target="#myModalIndia" class="btn btn-danger ml-auto mr-0 tm-btn-block">Details...</a>
-              </article>
+                <a href="#myModalIndia" data-toggle="modal" href="#myModal" data-target="#myModalIndia"
+                   class="btn btn-danger ml-auto mr-0 tm-btn-block">Details...</a>
+            </article>
+        </div>
+    </section>
+</div>
+
+
+<div id="tm-section-4" class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/redleaf.jpg' %}">
+
+    <div class="row tm-page-4-content">
+        <article class="col-xs-6 col-md-4 tm-bg-white-transparent" id="healine" >
+            <header><h3>Headlines</h3></header>
+
+            <!-- Added the code for ticker -->
+            <div id="myPageContent" class="container-fluid">
+                <section id="home">
+
+
+                    <div id="textSlider" class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-4 iamCol">
+                            <p>Eu</p>
+                            <p>Sou</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 slideCol">
+                            <div class="scroller">
+                                <div class="inner">
+                                    <p>PriscilaCunha</p>
+                                    <p>Web Developer</p>
+                                    <p>Web Designer</p>
+                                    <p>Aprendiz Jedi</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </section>
             </div>
-          </section>
-        </div>
 
-
-        <div id="tm-section-4" class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/redleaf.jpg' %}">
-
-          <div class="row tm-page-4-content">
-            <article  class="col-xs-6 col-md-4 tm-bg-white-transparent">
-              <header><h3>Comming Soon</h3></header>
-              <p>Adding soon</p>
-            </article>
-            <article class="col-xs-6 col-md-4 tm-bg-white-transparent">
-              <header><h3>Comming Soon</h3></header>
-              <p>OComming Soon</p>
-            </article>
-            <article class="col-xs-6 col-md-4 tm-bg-white-transparent">
-              <header><h3>Comming Soon</h3></header>
-              <p>Comming Soon</p>
-            </article>
-          </div>
-        </div>
-        <div class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/glassdrink.jpg' %}">
-          <div class="container">
-            <div class="row">
-              <div class="tm-img-container">
+            <!-- Code End for Ticker -->
+        </article>
+        <article class="col-xs-6 col-md-4 tm-bg-white-transparent">
+            <header><h3>Comming Soon</h3></header>
+            <p>OComming Soon</p>
+        </article>
+        <article class="col-xs-6 col-md-4 tm-bg-white-transparent">
+            <header><h3>Comming Soon</h3></header>
+            <p>Comming Soon</p>
+        </article>
+    </div>
+</div>
+<div class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/glassdrink.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="tm-img-container">
                 <div class="tm-img-slider">
- 
-                    <a class="image-link" href="{% static 'img/gallery-img-01.jpg' %}"><img src="{% static 'img/gallery-img-01-tn.jpg' %}" alt="Image" class="tm-slider-img"></a>
-                    <a class="image-link" href="{% static 'img/gallery-img-02.jpg' %}"><img src="{% static 'img/gallery-img-02-tn.jpg' %}" alt="Image" class="tm-slider-img"></a>
-                    <a class="image-link" href="{% static 'img/gallery-img-03.jpg' %}"><img src="{% static 'img/gallery-img-03-tn.jpg' %}" alt="Image" class="tm-slider-img"></a>
-                    <a class="image-link" href="{% static 'img/gallery-img-04.jpg' %}"><img src="{% static 'img/gallery-img-04-tn.jpg' %}" alt="Image" class="tm-slider-img"></a>
-                    <a class="image-link" href="{% static 'img/gallery-img-05.jpg' %}"><img src="{% static 'img/gallery-img-05-tn.jpg' %}" alt="Image" class="tm-slider-img"></a>
-                    <a class="image-link" href="{% static 'img/gallery-img-06.jpg' %}"><img src="{% static 'img/gallery-img-06-tn.jpg' %}" alt="Image" class="tm-slider-img"></a>
-                      
+
+                    <a class="image-link" href="{% static 'img/gallery-img-01.jpg' %}"><img
+                            src="{% static 'img/gallery-img-01-tn.jpg' %}" alt="Image" class="tm-slider-img"></a>
+                    <a class="image-link" href="{% static 'img/gallery-img-02.jpg' %}"><img
+                            src="{% static 'img/gallery-img-02-tn.jpg' %}" alt="Image" class="tm-slider-img"></a>
+                    <a class="image-link" href="{% static 'img/gallery-img-03.jpg' %}"><img
+                            src="{% static 'img/gallery-img-03-tn.jpg' %}" alt="Image" class="tm-slider-img"></a>
+                    <a class="image-link" href="{% static 'img/gallery-img-04.jpg' %}"><img
+                            src="{% static 'img/gallery-img-04-tn.jpg' %}" alt="Image" class="tm-slider-img"></a>
+                    <a class="image-link" href="{% static 'img/gallery-img-05.jpg' %}"><img
+                            src="{% static 'img/gallery-img-05-tn.jpg' %}" alt="Image" class="tm-slider-img"></a>
+                    <a class="image-link" href="{% static 'img/gallery-img-06.jpg' %}"><img
+                            src="{% static 'img/gallery-img-06-tn.jpg' %}" alt="Image" class="tm-slider-img"></a>
+
                 </div>
-              </div>
             </div>
-          </div>
+        </div>
+    </div>
+</div>
+
+<div class="parallax-window tm-position-relative tm-form-section" data-parallax="scroll"
+     data-image-src="{% static 'img/sunroad.JPG' %}">
+    <div class="container ">
+        <div class="row1 ">
+            <div class="col-xs-12">
+                <header><h5>Contact Us</h5></header>
+            </div>
+        </div>
+        <div class="row tm-page-5-content">
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="contact_message">
+                    <form action="#contact" method="post" class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="contact_name" name="contact_name" class="form-control"
+                                   placeholder="Name" required/>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="contact_email" name="contact_email" class="form-control"
+                                   placeholder="Email" required/>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="contact_message" name="contact_message" class="form-control" rows="9"
+                                      placeholder="Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-danger tm-btn-submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-6 col-xs-12">
+                <div class="tm-address-box">
+                    <p>Comming Soon
+                    </p>
+                    <br>
+                    <address>
+                        <b>Our Address</b><br>
+                        <br>
+                        Comming Soon<br>
+                        Comming Soon<br>
+                        Comming Soon
+                    </address>
+                </div>
+            </div>
         </div>
 
-        <div class="parallax-window tm-position-relative tm-form-section" data-parallax="scroll" data-image-src="{% static 'img/sunroad.JPG' %}">
-          <div class="container ">
-            <div class="row1 ">
-              <div class="col-xs-12">
-                <header><h5>Contact Us</h5></header>
-              </div>
-            </div>
-            <div class="row tm-page-5-content">
-              <div class="col-lg-4 col-md-6 col-xs-12">
-                <div class="contact_message">                  
-                  <form action="#contact" method="post" class="contact-form">
-                    <div class="form-group">
-                      <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name"  required/>
-                    </div>
-                    <div class="form-group">
-                      <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/>
-                    </div>
-                    <div class="form-group">
-                      <textarea id="contact_message" name="contact_message" class="form-control" rows="9" placeholder="Message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-danger tm-btn-submit">Submit</button>
-                  </form>
-                </div>
-              </div>
-              <div class="col-lg-8 col-md-6 col-xs-12">
-                <div class="tm-address-box">
-                  <p>Comming Soon
-                  </p>
-                  <br>
-                  <address>
-                    <b>Our Address</b><br>
-                    <br>
-                    Comming Soon<br>
-                    Comming Soon<br>
-                    Comming Soon
-                  </address>
-                </div>
-              </div>
-            </div>
-
-            <div class="footer">
-              <p>Copyright © 2020 Mayur Benodekar
+        <div class="footer">
+            <p>Copyright © 2020 Mayur Benodekar
                 . Design: Buggsy</p>
-              </div>
-            </div>
-            
-          </div>
+        </div>
+    </div>
+
+</div>
 
 
-          <!-- load JS files -->
-          <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>        <!-- jQuery (https://jquery.com/download/) -->
-          <script src="{% static 'js/parallax.min.js' %}"></script>
-     
-          <script type="text/javascript" src="{% static 'slick/slick.min.js' %}"></script>
-          <!-- Slick Carousel -->
+<!-- load JS files -->
+<script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>        <!-- jQuery (https://jquery.com/download/) -->
+<script src="{% static 'js/parallax.min.js' %}"></script>
 
-          <!-- Magnific Popup core JS file -->
-          <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'slick/slick.min.js' %}"></script>
+<!-- Slick Carousel -->
+
+<!-- Magnific Popup core JS file -->
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
 
 
-          <script>
+<script>
 
             function setCarousel() {
 
@@ -284,5 +326,7 @@
               });
             });
 
-          </script>
+
+
+</script>
 {% endblock %}
