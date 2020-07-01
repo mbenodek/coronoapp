@@ -10,7 +10,8 @@
               <div class="col-md-6 ml-auto tm-text-white">
                 <header><h1>Covid-19 Tracker</h1></header>
                 <p>Check the stats for Corona by clicking below</p>
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" href="#myModal"data-target="#myModal">STATS...</button>
+                  <a href="#tm-section-2" class="btn btn-danger">STATS...</a>
+
               </div>
             </div>
 
@@ -18,20 +19,21 @@
         </div>
 
         <!-- Below code is for India Cases -->
-    <!-- Adding the district level data in the Modal -->
-    <div class="modal fade " id="myModal" role="dialog" style="border:1px solid black;margin-left:auto;margin-right:auto;">
-        <div class="modal-dialog modal-xl">
 
-            <!-- Modal content-->
-            <div class="modal-content modal-dialog-scrollable modal-xl"  style="background-color:black;">
-                <div class="modal-header">
-                    <button type="button" class="more-link" data-dismiss="modal">&times;</button>
-                    <h1 class="modal-title">State/UT Carona Tracker</h1>
-                </div>
-                <div class="modal-body  modal-xl " style="background-color:grey;">
+    <!-- Adding the Country  Modal -->
 
+<div class="modal" tabindex="-1" id="myModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="background-color:black;">
+      <div class="modal-header " style="background-color:grey;">
+        <h5 class="modal-title">Covid 19 World</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
                     <!--Table-->
-                    <table class="table table-hover table-dark "  style="border:1px solid black;margin-left:auto;margin-right:auto;">
+                    <table class="table table-hover table-dark table-bordered"  style="border:1px solid black;margin-left:auto;margin-right:auto;">
                         <thead>
                         <tr >
                             <th >Country</th>
@@ -43,7 +45,7 @@
                         </tr>
                         </thead>
                         <div >
-                        {% for data in countrywise_count %}
+                        {% for data in countrywise_count|slice:":10"  %}
                            <tbody>
                             <tr >
                                 <td>{{ data.attributes.Country_Region }}</td>
@@ -56,61 +58,110 @@
                         {% endfor %}
                         </div>
                     </table>
-                </div>
             </div>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
     </div>
-    <!-- End of Model Code -->
+  </div>
+</div>
+    <!-- End of World Model Code -->
+
+    <!-- Start of India Model Code -->
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" id="myModalIndia" role="dialog">
+  <div class="modal-dialog " >
+    <div class="modal-content" style="background-color:black;">
+      <div class="modal-header " style="background-color:grey;">
+        <h5 class="modal-title">Covid 19 India</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                    <!--Table-->
+                    <table class="table table-hover table-dark table-bordered" id="indiatable">
+                        <thead>
+                        <tr >
+                            <th scope="col">State/UT</th>
+                            <th scope="col">Active Cases</th>
+                            <th scope="col">Confirmed</th>
+                            <th scope="col">Recovered</th>
+                            <th scope="col">Deaths</th>
+                            <th scope="col">Active Rate</th>
+                            <th scope="col">Death Rate</th>
+                            <th scope="col">Recovered Rate</th>
+                        </tr>
+                        </thead>
+
+                        {% for info in india_count %}
+                         {% for test in info.state_data  %}
+                        <div >
+                            <tbody>
+
+                                <td >{{ test.state }}</td>
+                                <td>{{ test.active }}</td>
+                                <td>{{ test.confirmed }}</td>
+                                <td>{{ test.recovered }}</td>
+                                <td>{{ test.deaths }}</td>
+                                <td>{{ test.active_rate }}</td>
+                                <td>{{ test.death_rate }}</td>
+                                <td>{{ test.recovered_rate }}</td>
+
+                        </div>
+                        </tbody>
+                        {% endfor %}
+                        {% endfor %}
+                    </table>
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- End of India Model Code -->
 
 
-        <div id="tm-section-2" class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/bg-img-02.jpg' %}">
+        <div id="tm-section-2" class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/church_blue.JPG' %}">
           <section class="container tm-page-1-content tm-page-2">
             <div class="row">
               <article class="col-md-6 tm-article tm-bg-white-transparent">
-                <header><h2 >Left Column</h2></header>
-                <b>Donec id augue ac risus faucibus elementum. Quisque tincidunt, sapien et tincidunt suscipit, diam ipsum iaculis augue, nec semper orci ex a arcu. Donec efficitur sem sed ligula mollis.</b>
+                <header><h2 >Covid 19 Stats - Country Wise</h2></header>
+                <b></b>
+              <a href="#myModal" data-toggle="modal" href="#myModal"data-target="#myModal" class="btn btn-danger ml-auto mr-0 tm-btn-block">Details...</a>
               </article>
 
               <article class="col-md-6 tm-article tm-bg-white-transparent">
-                <header><h2>Right Column</h2></header>
-                <b>Donec id augue ac risus faucibus elementum. Quisque tincidunt, sapien et tincidunt suscipit, diam ipsum iaculis augue, nec semper orci ex a arcu. Duis commodo orci libero.</b>
-                
-                  <a href="#tm-section-3" class="btn btn-danger ml-auto mr-0 tm-btn-block">Details...</a>
+                <header><h2>Covid 19 Stats - India</h2></header>
+                <b></b>
+                  <a href="#myModalIndia" data-toggle="modal" href="#myModal"data-target="#myModalIndia" class="btn btn-danger ml-auto mr-0 tm-btn-block">Details...</a>
               </article>
             </div>
           </section>
         </div>
-        <div id="tm-section-3" class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/bg-img-03.jpg' %}">
-          <section class="container tm-page-1-content">
-            <div class="row1">
-              <div class="col-xl-6 col-md-8 ml-auto">
-                <article class="tm-bg-white-transparent-page3">
-                  <header><h5 class="tm-bg-white">Individual HTML5 Web Template</h5></header>
-                  <p class="tm-bg-white2">Do you like this template? Please tell your friends about Tooplate website. Thank you. Praesent scelerisque erat placerat tempus laoreet. Vivamus pellentesque tempor congue. Vestibulum ac diam dui. Vivamus a fringilla velit. Proin mauris enim.</p>
-                    <a href="#tm-section-4" class="btn btn-danger tm-btn-right">Read More</a>
-                </article>
-              </div>
-            </div>
-          </section>
-        </div>
-        <div id="tm-section-4" class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/bg-img-04.jpg' %}">
+
+
+        <div id="tm-section-4" class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/leaf.jpg' %}">
 
           <div class="row tm-page-4-content">
             <article  class="col-xs-6 col-md-4 tm-bg-white-transparent">
-              <header><h3>Nunc sagittis</h3></header>
-              <p>Orci varius natoque penatibus et  magnis dis parturient montes, nascetur ridiculus mus. Praesent vel est varius nisi posuere aliquet. Aliquam luctus, dolor vel euismod scelerisque, sem mi commodo nisi.</p>
+              <header><h3>Comming Soon</h3></header>
+              <p>Adding soon</p>
             </article>
             <article class="col-xs-6 col-md-4 tm-bg-white-transparent">
-              <header><h3>Duis euismod</h3></header>
-              <p>Orci varius natoque penatibus et  magnis dis parturient montes, nascetur ridiculus mus. Praesent vel est varius nisi posuere aliquet. Aliquam luctus, dolor vel euismod scelerisque, sem mi commodo nisi.</p>
+              <header><h3>Comming Soon</h3></header>
+              <p>OComming Soon</p>
             </article>
             <article class="col-xs-6 col-md-4 tm-bg-white-transparent">
-              <header><h3>Ipsum vitae mattis</h3></header>
-              <p>Orci varius natoque penatibus et  magnis dis parturient montes, nascetur ridiculus mus. Praesent vel est varius nisi posuere aliquet. Aliquam luctus, sem mi commodo nisi.</p>
+              <header><h3>Comming Soon</h3></header>
+              <p>Comming Soon</p>
             </article>
           </div>
         </div>
-        <div class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/bg-img-05.jpg' %}">
+        <div class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/drink.JPG' %}">
           <div class="container">
             <div class="row">
               <div class="tm-img-container">
@@ -129,7 +180,7 @@
           </div>
         </div>
 
-        <div class="parallax-window tm-position-relative tm-form-section" data-parallax="scroll" data-image-src="{% static 'img/bg-img-06.jpg' %}">
+        <div class="parallax-window tm-position-relative tm-form-section" data-parallax="scroll" data-image-src="{% static 'img/sunroad.JPG' %}">
           <div class="container ">
             <div class="row1 ">
               <div class="col-xs-12">
@@ -155,23 +206,23 @@
               </div>
               <div class="col-lg-8 col-md-6 col-xs-12">
                 <div class="tm-address-box">
-                  <p>Integer pretium volutpat tempor. Maecenas condimentum tincidunt leo. Paesent scelerisque erat placerat tempus laoreet. Vivamus pellentesque tempor congue. Vestibulum ac diam dui. Vivamus a fringilla velit.
+                  <p>Comming Soon
                   </p>
                   <br>
                   <address>
                     <b>Our Address</b><br>
                     <br>
-                    440-660 Proin mauris enim,<br>
-                    dignissim sit amet ligula id,<br>
-                    finibus tempus erat 10200
+                    Comming Soon<br>
+                    Comming Soon<br>
+                    Comming Soon
                   </address>
                 </div>
               </div>
             </div>
 
             <div class="footer">
-              <p>Copyright © 2018 Your Company
-                . Design: Tooplate</p>
+              <p>Copyright © 2020 Mayur Benodekar
+                . Design: Buggsy</p>
               </div>
             </div>
             
@@ -187,7 +238,7 @@
 
           <!-- Magnific Popup core JS file -->
           <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-          
+
 
           <script>
 
